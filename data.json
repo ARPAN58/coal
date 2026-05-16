@@ -1,0 +1,28 @@
+{
+  "users": {
+    "demo": {
+      "password": "demo123",
+      "username": "demo",
+      "email": "demo@dataviz.com"
+    },
+    "admin": {
+      "password": "admin@2024",
+      "username": "admin",
+      "email": "admin@dataviz.com"
+    }
+  },
+  "transactions": [
+    { "id": "TRX001", "customer": "Alice Johnson", "product": "Bituminous Coal", "amount": 24999.00, "date": "2024-03-25", "status": "completed", "category": "Energy" },
+    { "id": "TRX002", "customer": "Bob Smith", "product": "Anthracite Coal", "amount": 8499.00, "date": "2024-03-25", "status": "pending", "category": "Energy" },
+    { "id": "TRX003", "customer": "Carol Williams", "product": "Sub-bituminous Coal", "amount": 49999.00, "date": "2024-03-24", "status": "completed", "category": "Energy" },
+    { "id": "TRX004", "customer": "David Brown", "product": "Lignite Coal", "amount": 12499.00, "date": "2024-03-23", "status": "completed", "category": "Energy" },
+    { "id": "TRX005", "customer": "Eve Davis", "product": "Bituminous Coal", "amount": 33999.00, "date": "2024-03-22", "status": "completed", "category": "Energy" },
+    { "id": "TRX006", "customer": "Frank Miller", "product": "Steam Coal", "amount": 18999.00, "date": "2024-03-21", "status": "completed", "category": "Energy" },
+    { "id": "TRX007", "customer": "Grace Wilson", "product": "Coking Coal", "amount": 52999.00, "date": "2024-03-20", "status": "pending", "category": "Metallurgical" },
+    { "id": "TRX008", "customer": "Henry Taylor", "product": "Thermal Coal", "amount": 28999.00, "date": "2024-03-19", "status": "completed", "category": "Energy" },
+    { "id": "TRX009", "customer": "Iris Anderson", "product": "Bituminous Coal", "amount": 41999.00, "date": "2024-03-18", "status": "failed", "category": "Energy" },
+    { "id": "TRX010", "customer": "Jack Thomas", "product": "Anthracite Coal", "amount": 22499.00, "date": "2024-03-17", "status": "completed", "category": "Energy" },
+    { "id": "TRX011", "customer": "Kate Jackson", "product": "Sub-bituminous Coal", "amount": 37999.00, "date": "2024-03-16", "status": "completed", "category": "Energy" },
+    { "id": "TRX012", "customer": "Liam White", "product": "Lignite Coal", "amount": 15499.00, "date": "2024-03-15", "status": "pending", "category": "Energy" }
+  ]
+}
