@@ -242,6 +242,17 @@
                                     <li id="highlightOpenIssues">Open issues: 0</li>
                                 </ul>
                             </div>
+                            <div class="analytics-panel predict-panel">
+                                <h3><i class="fas fa-brain"></i> Coal Profit Prediction</h3>
+                                <p class="section-subtitle">Powered by Databricks · coal-profit-endpoint</p>
+                                <div class="predict-form">
+                                    <input type="number" id="predictQuantity" class="search-box" placeholder="Quantity (tons)" min="0" step="any">
+                                    <button class="refresh-btn" onclick="predictCoalProfit()">
+                                        <i class="fas fa-magic"></i> Predict
+                                    </button>
+                                </div>
+                                <pre id="predictResult" class="predict-result">Enter quantity and click Predict</pre>
+                            </div>
                         </div>
                     </div>
                 </section>

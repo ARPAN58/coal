@@ -878,6 +878,37 @@ function updateUserInfo() {
     });
 }
 
+async function predictCoalProfit() {
+    const quantity = document.getElementById('predictQuantity')?.value;
+    const resultEl = document.getElementById('predictResult');
+    if (!resultEl) return;
+
+    if (!quantity) {
+        resultEl.textContent = 'Please enter a quantity in tons.';
+        return;
+    }
+
+    resultEl.textContent = 'Calling Databricks coal-profit-endpoint...';
+
+    try {
+        const response = await fetch('/api/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ quantity })
+        });
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || 'Prediction failed');
+        }
+
+        resultEl.textContent = JSON.stringify(data.data, null, 2);
+    } catch (error) {
+        resultEl.textContent = `Error: ${error.message}`;
+        console.error('Prediction error:', error);
+    }
+}
+
 function logout() {
     sessionStorage.removeItem('isLoggedIn');
     sessionStorage.removeItem('username');

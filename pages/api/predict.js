@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       },
       {
         headers: {
-          Authorization: `Bearer 9d7d8a34a01bea460b932f4eb3d023c8300638166f06ad850b2337eb6f9ae46a`,
+          Authorization: `Bearer ${process.env.DATABRICKS_TOKEN}`,
           "Content-Type": "application/json"
         }
       }

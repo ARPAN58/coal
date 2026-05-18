@@ -1,9 +1,15 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const axios = require('axios');
 const compression = require('compression');
 const helmet = require('helmet');
+
+const DATABRICKS_HOST = process.env.DATABRICKS_HOST || 'https://dbc-20f214f0-260f.cloud.databricks.com';
+const DATABRICKS_ENDPOINT = process.env.DATABRICKS_ENDPOINT || 'coal-profit-endpoint';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -246,6 +252,47 @@ app.get('/api/analytics', cacheControl(600), (req, res) => {
   } catch (error) {
     console.error('Analytics error:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+// Databricks model serving — coal-profit-endpoint
+app.post('/api/predict', async (req, res) => {
+  const token = process.env.DATABRICKS_TOKEN;
+  const { quantity } = req.body;
+
+  if (!token) {
+    return res.status(503).json({
+      success: false,
+      message: 'Databricks not configured. Set DATABRICKS_TOKEN in your .env file.'
+    });
+  }
+
+  if (quantity === undefined || quantity === null || quantity === '') {
+    return res.status(400).json({ success: false, message: 'Quantity is required' });
+  }
+
+  try {
+    const response = await axios.post(
+      `${DATABRICKS_HOST}/serving-endpoints/${DATABRICKS_ENDPOINT}/invocations`,
+      {
+        dataframe_records: [{ Quantity_Tons: Number(quantity) }]
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    res.json({ success: true, data: response.data });
+  } catch (error) {
+    const details = error.response?.data;
+    console.error('Databricks predict error:', details || error.message);
+    res.status(error.response?.status || 500).json({
+      success: false,
+      message: details?.message || error.message
+    });
   }
 });
 
