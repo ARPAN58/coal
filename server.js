@@ -303,9 +303,13 @@ app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'login.html'))
 // 404 handler
 app.use((req, res) => res.status(404).json({ success: false, message: 'Not found' }));
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`✅ Analytics Dashboard running on http://localhost:${PORT}`);
-  console.log(`📊 Dashboard: http://localhost:${PORT}`);
-  console.log(`🔐 Login: http://localhost:${PORT}/login.html`);
-});
+module.exports = app;
+
+// Local dev only — Vercel uses api/index.js as a serverless handler
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`✅ Analytics Dashboard running on http://localhost:${PORT}`);
+    console.log(`📊 Dashboard: http://localhost:${PORT}`);
+    console.log(`🔐 Login: http://localhost:${PORT}/login.html`);
+  });
+}
