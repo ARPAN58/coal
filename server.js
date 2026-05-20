@@ -45,25 +45,14 @@ const defaultData = {
   ]
 };
 
-const loadData = () => {
-  if (fs.existsSync(dataFilePath)) {
-    try {
-      const raw = fs.readFileSync(dataFilePath, 'utf8');
-      const parsed = JSON.parse(raw);
-
-      if (parsed.users && parsed.transactions) {
-        return parsed;
-      }
-      console.warn('data.json is missing required keys. Falling back to default data.');
-    } catch (error) {
-      console.error('Error reading data.json:', error);
-    }
-  }
-
-  return defaultData;
-};
-
-const dataStore = loadData();
+let dataStore;
+try {
+  // Requiring data.json directly ensures Vercel bundles it with serverless functions
+  dataStore = require('./data.json');
+} catch (error) {
+  console.warn('data.json not found or failed to load, using default data.');
+  dataStore = defaultData;
+}
 const users = dataStore.users;
 const transactions = dataStore.transactions;
 
