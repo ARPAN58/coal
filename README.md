@@ -1,6 +1,6 @@
-# Analytics Dashboard
+# Coal Supply
 
-A lightweight analytics dashboard built with Node.js and Express.
+A lightweight coal supply dashboard built with Node.js and Express.
 
 ## Features
 
