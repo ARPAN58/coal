@@ -37,6 +37,13 @@ body {
     font-weight: 700;
 }
 
+.header-left .logo img,
+.login-header .logo img {
+    width: 2.4rem;
+    height: 2.4rem;
+    object-fit: contain;
+}
+
 .header-left .logo i {
     font-size: 2rem;
 }
