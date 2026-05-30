@@ -287,34 +287,36 @@
         }
 
         .login-header .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
+            display: none;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header::before {
+            content: '';
+            display: block;
+            width: 3px;
+            height: 32px;
+            background: linear-gradient(180deg, #4f46e5, #8b5cf6);
+            margin: 0 auto 1.2rem;
+            border-radius: 2px;
+        }
+
+        .login-header h2 {
+            color: #0f172a;
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
             font-weight: 700;
-            color: #667eea;
+            letter-spacing: -0.3px;
         }
 
-        .login-header .logo i { 
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .login-header h2 { 
-            color: #1f2937; 
-            font-size: 1.8rem; 
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .login-header p { 
-            color: #6b7280; 
-            font-size: 1rem;
+        .login-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin: 0;
         }
 
         .form-group {
@@ -323,10 +325,11 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            color: #374151;
-            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #1f2937;
+            font-weight: 600;
             font-size: 0.9rem;
+            letter-spacing: 0.2px;
         }
 
         .input-group {
@@ -338,25 +341,35 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #9ca3af;
+            color: #cbd5e1;
             font-size: 1rem;
+            transition: color 0.2s ease;
         }
 
         .form-group input {
             width: 100%;
-            padding: 0.875rem 1rem 0.875rem 2.75rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
+            padding: 0.85rem 1rem 0.85rem 2.8rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
             font-size: 0.95rem;
             transition: all 0.3s ease;
-            background: #f9fafb;
+            background: #f8fafc;
+            color: #1f2937;
+        }
+
+        .form-group input::placeholder {
+            color: #94a3b8;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #4f46e5;
             background: white;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
+        }
+
+        .form-group input:focus ~ i {
+            color: #4f46e5;
         }
 
         .remember-forgot {
@@ -540,12 +553,8 @@
 
         <div class="login-panel" id="login">
             <div class="login-header">
-                <div class="logo">
-                    <img src="logo.svg" alt="Coal Supply logo" class="logo-image">
-                    <span>Coal Supply</span>
-                </div>
-                <h2>Welcome Back</h2>
-                <p>Secure access to your dashboard and analytics tools.</p>
+                <h2>Sign In</h2>
+                <p>Access your Coal Supply dashboard</p>
             </div>
 
             <div class="error-message" id="errorMessage">
