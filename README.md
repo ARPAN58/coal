@@ -399,6 +399,17 @@ Predict coal profit using Databricks ML serving endpoint.
 
 ## 🔐 Authentication
 
+---
+
+## 🏠 Home Introduction
+
+The main `index.html` page now includes a short introduction hero section that welcomes users to the dashboard, provides a quick CTA to the Dashboard, and includes a small illustrative image. This is intended as a friendly landing area before users navigate into the analytics views.
+
+Files changed:
+- `index.html` — added `home-intro` section (hero text + CTAs)
+- `styles.css` — added styles for the `home-intro` layout
+
+
 ### Credentials
 
 #### Demo Account

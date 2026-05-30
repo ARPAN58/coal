@@ -526,6 +526,48 @@ body {
     color: #6b7280;
 }
 
+/* Home Introduction */
+.home-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    background: linear-gradient(90deg, rgba(102,126,234,0.06), rgba(118,75,162,0.04));
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+.home-intro .intro-content {
+    max-width: 70%;
+}
+.home-intro h2 {
+    font-size: 1.6rem;
+    color: #111827;
+    margin-bottom: 0.4rem;
+}
+.home-intro p {
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+}
+.home-intro .intro-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+.home-intro .logout-btn {
+    background: white;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+}
+.home-intro .intro-image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .header {
