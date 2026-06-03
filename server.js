@@ -151,6 +151,34 @@ app.get('/api/transactions', cacheControl(300), (req, res) => {
   }
 });
 
+// Add a new transaction record
+app.post('/api/transactions', (req, res) => {
+  try {
+    const { customer, product, category, amount, status, date } = req.body;
+
+    if (!customer || !product || amount === undefined || !status) {
+      return res.status(400).json({ success: false, message: 'Missing required transaction fields' });
+    }
+
+    const newId = 'TRX' + String(transactions.length + 1).padStart(3, '0');
+    const newTransaction = {
+      id: newId,
+      customer: String(customer).trim(),
+      product: String(product).trim(),
+      category: String(category || 'General').trim(),
+      amount: Number(amount),
+      date: String(date || new Date().toISOString().split('T')[0]),
+      status: String(status).toLowerCase()
+    };
+
+    transactions.unshift(newTransaction);
+    res.status(201).json({ success: true, data: newTransaction });
+  } catch (error) {
+    console.error('Add transaction error:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 // Get analytics data
 app.get('/api/analytics', cacheControl(600), (req, res) => {
   try {
