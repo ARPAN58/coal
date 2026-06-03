@@ -876,6 +876,10 @@ function updateUserInfo() {
     document.querySelectorAll('.username').forEach(el => {
         el.textContent = username;
     });
+    const signinLink = document.getElementById('signinLink');
+    if (signinLink) {
+        signinLink.style.display = checkAuth() ? 'none' : '';
+    }
 }
 
 async function predictCoalProfit() {
