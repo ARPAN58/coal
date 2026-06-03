@@ -414,6 +414,39 @@ function setupEventListeners() {
     if (timeFilter) {
         timeFilter.addEventListener('change', handleTimeFilter);
     }
+
+    // Supply modal controls
+    const openModalBtn = document.getElementById('openModalBtn');
+    const supplyModal = document.getElementById('supplyModal');
+    const cancelModalBtn = document.getElementById('cancelModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const supplyForm = document.getElementById('supplyForm');
+
+    if (openModalBtn && supplyModal) {
+        openModalBtn.addEventListener('click', () => {
+            supplyModal.style.display = 'flex';
+            // optional: focus first input
+            const firstInput = supplyForm?.querySelector('input[name="customer"]');
+            if (firstInput) firstInput.focus();
+        });
+    }
+
+    if (cancelModalBtn) {
+        cancelModalBtn.addEventListener('click', closeSupplyModal);
+    }
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', closeSupplyModal);
+    }
+
+    if (supplyModal) {
+        supplyModal.addEventListener('click', (e) => {
+            if (e.target === supplyModal) closeSupplyModal();
+        });
+    }
+
+    if (supplyForm) {
+        supplyForm.addEventListener('submit', handleSupplyFormSubmit);
+    }
 }
 
 // Handle dashboard search
@@ -918,6 +951,59 @@ function logout() {
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('token');
     window.location.href = 'login.html';
+}
+
+// Supply modal helpers
+function closeSupplyModal() {
+    const supplyModal = document.getElementById('supplyModal');
+    if (supplyModal) supplyModal.style.display = 'none';
+}
+
+function getCurrentDateYMD() {
+    return new Date().toISOString().split('T')[0];
+}
+
+async function handleSupplyFormSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const customer = form.customer.value.trim();
+    const product = form.product.value.trim();
+    const category = form.category.value.trim();
+    const amount = parseFloat(form.amount.value) || 0;
+    const status = form.status.value;
+
+    const payload = {
+        customer,
+        product,
+        category: category || 'General',
+        amount,
+        status,
+        date: getCurrentDateYMD()
+    };
+
+    try {
+        const res = await fetch('/api/transactions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (res.ok && (data.success !== false)) {
+            // success: close modal, reset form, refresh transactions
+            closeSupplyModal();
+            form.reset();
+            await fetchTransactions();
+            populateTransactionsPage();
+            renderReportHistory();
+            updateUserInfo();
+        } else {
+            alert('Failed to add record: ' + (data.message || res.statusText));
+        }
+    } catch (err) {
+        console.error('Error adding supply record:', err);
+        alert('Error adding record. See console for details.');
+    }
 }
 
 // Add spin animation
